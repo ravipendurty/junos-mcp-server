@@ -78,6 +78,9 @@ from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.utils.config import Config
 
+from mcp_trace.middleware import TraceMiddleware
+from mcp_trace.adapters.console_adapter import ConsoleTraceAdapter
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger('jmcp-server')
@@ -573,6 +576,9 @@ The device is now available for use with all Junos MCP tools."""
         log.error(f"Unexpected error in add_device: {e}")
         return [types.TextContent(type="text", text=f"❌ Failed to add device: {str(e)}")]
 
+trace_adapter = ConsoleTraceAdapter()
+trace_middleware = TraceMiddleware(adapter=trace_adapter)
+mcp.add_middleware(trace_middleware)
 
 def prepare_connection_params(device_info: dict, router_name: str) -> dict:
     """Prepare connection parameters based on authentication type

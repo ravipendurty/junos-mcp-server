@@ -1,0 +1,21 @@
+{
+    "pe1": {
+        "ip": "192.168.121.101",
+        "port": 22,
+        "username": "admin",
+        "auth": {
+            "type": "password",
+            "password": "admin@123"
+        }
+    },
+    "pe2": {
+        "ip": "192.168.121.102",
+        "port": 22,
+        "username": "admin",
+        "auth": {
+            "type": "password",
+            "password": "admin@123"
+        }
+    }
+}
+
